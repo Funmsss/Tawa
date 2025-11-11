@@ -36,9 +36,14 @@ export function ListingDetail({ listingId, onBack }: ListingDetailProps) {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!message.trim() || !listing?.seller?._id) {
+
+    if (!message.trim()) {
       toast.error("Please enter a message");
+      return;
+    }
+
+    if (!listing?.seller?._id) {
+      toast.error("Seller information unavailable. Please refresh the page.");
       return;
     }
 
@@ -48,7 +53,7 @@ export function ListingDetail({ listingId, onBack }: ListingDetailProps) {
         receiverId: listing.seller._id,
         content: message.trim(),
       });
-      
+
       toast.success("Message sent successfully");
       setMessage("");
     } catch (error) {
@@ -182,22 +187,34 @@ export function ListingDetail({ listingId, onBack }: ListingDetailProps) {
           {!isOwner && listing.status === "approved" && (
             <div className="bg-white border rounded-xl p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Seller</h3>
-              <form onSubmit={handleSendMessage} className="space-y-4">
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Hi, I'm interested in this item..."
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent resize-none"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-rose-500 text-white rounded-xl font-semibold hover:bg-rose-600 transition-colors"
-                >
-                  Send Message
-                </button>
-              </form>
+              {!listing?.seller?._id ? (
+                <div className="text-center py-6 text-gray-500">
+                  <p className="mb-2">Seller information is currently unavailable.</p>
+                  <button
+                    onClick={() => window.location.reload()}
+                    className="text-rose-500 hover:text-rose-600 font-medium"
+                  >
+                    Refresh page
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSendMessage} className="space-y-4">
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Hi, I'm interested in this item..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent resize-none"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="w-full py-3 bg-rose-500 text-white rounded-xl font-semibold hover:bg-rose-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              )}
             </div>
           )}
 

@@ -72,7 +72,7 @@ export const getListings = query({
 
         return {
           ...listing,
-          seller: seller && 'name' in seller ? { name: seller.name, email: seller.email } : null,
+          seller: seller ? { name: seller.name, email: seller.email, _id: seller._id } : null,
           category: category && 'name' in category ? category.name : "Unknown",
           imageUrls: imageUrls.filter(Boolean),
         };
@@ -106,7 +106,7 @@ export const getFeaturedListings = query({
 
         return {
           ...listing,
-          seller: seller && 'name' in seller ? { name: seller.name, email: seller.email } : null,
+          seller: seller ? { name: seller.name, email: seller.email, _id: seller._id } : null,
           category: category && 'name' in category ? category.name : "Unknown",
           imageUrls: imageUrls.filter(Boolean),
         };
@@ -132,7 +132,7 @@ export const getListingById = query({
 
     return {
       ...listing,
-      seller: seller && 'name' in seller ? { name: seller.name, email: seller.email, _id: seller._id } : null,
+      seller: seller ? { name: seller.name, email: seller.email, _id: seller._id } : null,
       category: category && 'name' in category ? category.name : "Unknown",
       imageUrls: imageUrls.filter(Boolean),
     };
