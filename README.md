@@ -1,23 +1,33 @@
-# Naija Hub
+# Tawa
 
-Naija Hub is a Nigerian online marketplace platform that connects buyers and sellers across the country.
+Tawa is a Nigerian online rental marketplace that connects **renters** with **listers** across the country.  
+Whether you need an item temporarily or want to rent out your own, Tawa makes the process easy, secure, and reliable.
+
+---
 
 ## Features
 
-- **Buy & Sell**: Create listings to sell items or browse available products
-- **Categories**: Electronics, Fashion, Home & Garden, Vehicles, Real Estate, and more
-- **Messaging**: Direct communication between buyers and sellers
-- **Search & Filter**: Find items by keyword, category, location, and price range
-- **User Profiles**: Manage your listings and track your activity
-- **Featured Listings**: Highlight your most important items
-- **Admin Moderation**: Secure platform with listing approval system
+- **Rent & List**: Create listings to rent out items or browse available rentals.  
+- **Categories**: Electronics, Fashion, Home & Garden, Vehicles, Tools & Equipment, and more.  
+- **Messaging**: Direct communication between renters and listers.  
+- **Search & Filter**: Find rentals by keyword, category, location, or price range.  
+- **Featured Listings**: Highlight your most important rentals.  
+- **Admin Moderation**: Secure platform with listing approval system.  
+- **User Profiles**: Manage your listings and track your rental activity.
+
+---
 
 ## Getting Started
 
-Run the development server:
+### Prerequisites
+
+- Node.js installed (v18+ recommended)  
+- Git installed  
+- Convex account for backend  
+
+### Installation
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-```
-
-Visit the application in your browser to start buying and selling.
+git clone https://github.com/funmsss/tawa.git

@@ -37,7 +37,7 @@ export default function App() {
                 onClick={() => handleNavigation("home")}
                 className="text-xl sm:text-2xl font-bold text-rose-500 hover:text-rose-600 transition-colors"
               >
-                NaijaHub
+                Tawa
               </button>
 
               <Authenticated>
@@ -61,7 +61,7 @@ export default function App() {
                         : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                     }`}
                   >
-                    Sell
+                    List
                   </button>
                   <button
                     onClick={() => setCurrentPage("dashboard")}
@@ -139,7 +139,7 @@ export default function App() {
               </Authenticated>
               <Unauthenticated>
                 <div className="text-xs sm:text-sm text-gray-600">
-                  Sign in to start selling
+                  Sign in to start listing
                 </div>
               </Unauthenticated>
             </div>
@@ -178,7 +178,7 @@ export default function App() {
                         : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                     }`}
                   >
-                    Sell
+                    List
                   </button>
                   <button
                     onClick={() => handleNavigation("dashboard")}
@@ -247,7 +247,7 @@ export default function App() {
           <div className="max-w-md mx-auto mt-16 px-4">
             <div className="text-center mb-8">
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                Buy & Sell Anything
+                Rent & List Anything
               </h1>
               <p className="text-xl text-gray-600">
                 Fast, Simple, Secure marketplace for Nigeria

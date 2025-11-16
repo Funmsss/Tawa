@@ -42,15 +42,15 @@ export function ListingDetail({ listingId, onBack }: ListingDetailProps) {
       return;
     }
 
-    if (!listing?.seller?._id) {
-      toast.error("Seller information unavailable. Please refresh the page.");
+    if (!listing?.Lister?._id) {
+      toast.error("Lister information unavailable. Please refresh the page.");
       return;
     }
 
     try {
       await sendMessage({
         listingId: listingId,
-        receiverId: listing.seller._id,
+        receiverId: listing.Lister._id,
         content: message.trim(),
       });
 
@@ -79,7 +79,7 @@ export function ListingDetail({ listingId, onBack }: ListingDetailProps) {
     );
   }
 
-  const isOwner = loggedInUser?._id === listing.seller?._id;
+  const isOwner = loggedInUser?._id === listing.Lister?._id;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -165,19 +165,19 @@ export function ListingDetail({ listingId, onBack }: ListingDetailProps) {
             <p className="text-gray-700 whitespace-pre-wrap">{listing.description}</p>
           </div>
 
-          {/* Seller Info */}
+          {/* Lister Info */}
           <div className="bg-gray-50 rounded-xl p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Seller Information</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">Lister Information</h3>
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-rose-500 rounded-full flex items-center justify-center text-white font-semibold">
-                {listing.seller?.name?.[0] || listing.seller?.email?.[0] || "?"}
+                {listing.Lister?.name?.[0] || listing.Lister?.email?.[0] || "?"}
               </div>
               <div>
                 <div className="font-medium text-gray-900">
-                  {listing.seller?.name || "Anonymous"}
+                  {listing.Lister?.name || "Anonymous"}
                 </div>
                 <div className="text-sm text-gray-600">
-                  {listing.seller?.email}
+                  {listing.Lister?.email}
                 </div>
               </div>
             </div>
@@ -186,10 +186,10 @@ export function ListingDetail({ listingId, onBack }: ListingDetailProps) {
           {/* Contact Form */}
           {!isOwner && listing.status === "approved" && (
             <div className="bg-white border rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Seller</h3>
-              {!listing?.seller?._id ? (
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Lister</h3>
+              {!listing?.Lister?._id ? (
                 <div className="text-center py-6 text-gray-500">
-                  <p className="mb-2">Seller information is currently unavailable.</p>
+                  <p className="mb-2">Lister information is currently unavailable.</p>
                   <button
                     onClick={() => window.location.reload()}
                     className="text-rose-500 hover:text-rose-600 font-medium"

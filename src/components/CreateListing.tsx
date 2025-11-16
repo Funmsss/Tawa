@@ -108,7 +108,7 @@ export function CreateListing({ onSuccess }: CreateListingProps) {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="What are you selling?"
+              placeholder="What are you listing?"
               className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent"
               required
             />

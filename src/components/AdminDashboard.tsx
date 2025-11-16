@@ -210,7 +210,7 @@ export function AdminDashboard() {
                       </div>
                       
                       <div className="text-xs text-gray-400 mb-4">
-                        Seller: {listing.seller?.name || listing.seller?.email}
+                        Lister: {listing.Lister?.name || listing.Lister?.email}
                       </div>
                       
                       <div className="space-y-2">

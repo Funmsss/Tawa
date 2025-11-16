@@ -58,10 +58,10 @@ export const getListings = query({
       });
     }
 
-    // Get seller info and images for each listing
+    // Get Lister info and images for each listing
     const listingsWithDetails = await Promise.all(
       listings.map(async (listing) => {
-        const seller = await ctx.db.get(listing.sellerId);
+        const lister = await ctx.db.get(listing.listerId);
         const category = await ctx.db.get(listing.categoryId);
         const imageUrls = await Promise.all(
           listing.images.map(async (imageId) => {
@@ -72,7 +72,7 @@ export const getListings = query({
 
         return {
           ...listing,
-          seller: seller ? { name: seller.name, email: seller.email, _id: seller._id } : null,
+          lister: lister ? { name: lister.name, email: lister.email, _id: lister._id } : null,
           category: category && 'name' in category ? category.name : "Unknown",
           imageUrls: imageUrls.filter(Boolean),
         };
@@ -95,7 +95,7 @@ export const getFeaturedListings = query({
 
     return Promise.all(
       listings.map(async (listing) => {
-        const seller = await ctx.db.get(listing.sellerId);
+        const lister = await ctx.db.get(listing.listerId);
         const category = await ctx.db.get(listing.categoryId);
         const imageUrls = await Promise.all(
           listing.images.map(async (imageId) => {
@@ -106,7 +106,7 @@ export const getFeaturedListings = query({
 
         return {
           ...listing,
-          seller: seller ? { name: seller.name, email: seller.email, _id: seller._id } : null,
+          lister: listerer ? { name: lister.name, email: lister.email, _id: lister._id } : null,
           category: category && 'name' in category ? category.name : "Unknown",
           imageUrls: imageUrls.filter(Boolean),
         };
@@ -121,7 +121,7 @@ export const getListingById = query({
     const listing = await ctx.db.get(args.id);
     if (!listing) return null;
 
-    const seller = await ctx.db.get(listing.sellerId);
+    const listerer = await ctx.db.get(listing.listerId);
     const category = await ctx.db.get(listing.categoryId);
     const imageUrls = await Promise.all(
       listing.images.map(async (imageId) => {
@@ -132,7 +132,7 @@ export const getListingById = query({
 
     return {
       ...listing,
-      seller: seller ? { name: seller.name, email: seller.email, _id: seller._id } : null,
+      listererer: lister ? { name: lister.name, email: lister.email, _id: lister._id } : null,
       category: category && 'name' in category ? category.name : "Unknown",
       imageUrls: imageUrls.filter(Boolean),
     };
@@ -169,7 +169,7 @@ export const createListing = mutation({
 
     return await ctx.db.insert("listings", {
       ...args,
-      sellerId: userId,
+      ListerId: userId,
       status: "pending",
       views: 0,
     });
@@ -184,7 +184,7 @@ export const getUserListings = query({
 
     const listings = await ctx.db
       .query("listings")
-      .withIndex("by_seller", (q) => q.eq("sellerId", userId))
+      .withIndex("by_Lister", (q) => q.eq("ListerId", userId))
       .order("desc")
       .collect();
 
@@ -233,9 +233,9 @@ export const updateListingStatus = mutation({
 
     // Business logic for who can change what status:
     if (args.status === "sold") {
-      // Only the seller can mark their own listing as sold
-      if (listing.sellerId !== userId) {
-        throw new Error("Only the seller can mark their listing as sold");
+      // Only the Lister can mark their own listing as sold
+      if (listing.ListerId !== userId) {
+        throw new Error("Only the Lister can mark their listing as sold");
       }
     } else if (args.status === "approved" || args.status === "rejected") {
       // Only admins can approve or reject listings
@@ -243,9 +243,9 @@ export const updateListingStatus = mutation({
         throw new Error("Only admins can approve or reject listings");
       }
     } else if (args.status === "pending") {
-      // Sellers can resubmit rejected listings, admins can change any status
-      if (listing.sellerId !== userId && !isAdmin) {
-        throw new Error("Only the seller or admin can change listing to pending");
+      // Listers can resubmit rejected listings, admins can change any status
+      if (listing.ListerId !== userId && !isAdmin) {
+        throw new Error("Only the Lister or admin can change listing to pending");
       }
     }
 

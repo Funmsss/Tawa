@@ -17,7 +17,7 @@ const applicationTables = {
     categoryId: v.id("categories"),
     condition: v.union(v.literal("new"), v.literal("used")),
     location: v.string(),
-    sellerId: v.id("users"),
+    ListerId: v.id("users"),
     images: v.array(v.id("_storage")),
     status: v.union(
       v.literal("pending"),
@@ -28,7 +28,7 @@ const applicationTables = {
     featured: v.optional(v.boolean()),
     views: v.optional(v.number()),
   })
-    .index("by_seller", ["sellerId"])
+    .index("by_Lister", ["ListerId"])
     .index("by_category", ["categoryId"])
     .index("by_status", ["status"])
     .index("by_location", ["location"])

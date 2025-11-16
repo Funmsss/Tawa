@@ -195,7 +195,7 @@ export const getPendingListings = query({
 
     const listingsWithDetails = await Promise.all(
       result.page.map(async (listing) => {
-        const seller = await ctx.db.get(listing.sellerId);
+        const Lister = await ctx.db.get(listing.ListerId);
         const category = await ctx.db.get(listing.categoryId);
         const imageUrls = await Promise.all(
           listing.images.slice(0, 1).map(async (imageId) => {
@@ -206,7 +206,7 @@ export const getPendingListings = query({
 
         return {
           ...listing,
-          seller: seller && 'name' in seller ? { name: seller.name, email: seller.email } : null,
+          Lister: Lister && 'name' in Lister ? { name: Lister.name, email: Lister.email } : null,
           category: category && 'name' in category ? category.name : "Unknown",
           imageUrls: imageUrls.filter(Boolean),
         };
